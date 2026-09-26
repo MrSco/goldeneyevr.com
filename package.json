@@ -1,0 +1,13 @@
+{
+  "name": "goldeneyevr.com",
+  "private": true,
+  "description": "The GoldenEye VR website, served by Cloudflare Workers static assets.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "media": "python tools/media.py"
+  },
+  "devDependencies": {
+    "wrangler": "^4.141.0"
+  }
+}

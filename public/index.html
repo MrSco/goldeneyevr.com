@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoldenEye VR · GoldenEye 007 natively on Meta Quest</title>
+  <meta name="description" content="GoldenEye 007, running natively on your Meta Quest. No PC, no streaming, no emulator: a free, from-source VR port built on the GoldenEye decompilation. Bring your own ROM.">
+  <link rel="canonical" href="https://goldeneyevr.com/">
+  <meta name="theme-color" content="#0b0a08">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GoldenEye VR">
+  <meta property="og:url" content="https://goldeneyevr.com/">
+  <meta property="og:title" content="GoldenEye VR: GoldenEye 007, natively on your Quest">
+  <meta property="og:description" content="No PC, no streaming, no emulator. A free, from-source VR port built on the GoldenEye decompilation. Bring your own ROM.">
+  <meta property="og:image" content="https://goldeneyevr.com/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GoldenEye VR: a golden eye with a sniper reticle in the iris.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/barlow-semi-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/main.js" defer></script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <img src="/img/hero.webp" alt="" width="1024" height="559" fetchpriority="high">
+  </div>
+
+  <nav class="top wrap" aria-label="Main">
+    <a class="brand" href="/">
+      <img src="/img/mark.webp" alt="" width="28" height="28">
+      GoldenEye VR
+    </a>
+    <div class="top-links">
+      <a href="#video">Video</a>
+      <a href="#play">Features</a>
+      <a href="#screens">Screens</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/MrSco/goldeneye-vr">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="hero-body wrap">
+    <p class="kicker">Early access &middot; Free &middot; Quest 2 / 3 / 3S / Pro</p>
+    <h1>GoldenEye 007, running natively on your&nbsp;Quest.</h1>
+    <p class="lede">No PC, no streaming, no emulator. A from-source port of the N64 classic, rebuilt for virtual reality on top of the GoldenEye decompilation.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="https://sidequestvr.com/app/62675/goldeneye-vr">Install with SideQuest</a>
+      <a class="btn" href="https://github.com/MrSco/goldeneye-vr/releases/latest" data-apk>Download APK<span class="ver" data-version></span></a>
+    </div>
+    <p class="fine">Bring your own game: you need a ROM of the USA cartridge you own. <a href="#rom">Why?</a></p>
+  </div>
+</header>
+
+<main>
+
+  <section id="video" class="section wrap">
+    <p class="kicker">01 &middot; Video</p>
+    <h2>See it in the headset</h2>
+    <a class="video" href="https://www.youtube.com/watch?v=Nmlq5QxnVuM" data-youtube="Nmlq5QxnVuM">
+      <img src="/img/shots/scope.webp" alt="" width="1920" height="1080" loading="lazy">
+      <span class="play" aria-hidden="true"></span>
+      <span class="video-label">GoldenEye 007 in VR is REAL (natively on Quest 3, free download)</span>
+      <span class="visually-hidden">Play the video</span>
+    </a>
+    <p class="note">The video loads from YouTube when you press play.</p>
+  </section>
+
+  <section id="play" class="section wrap">
+    <p class="kicker">02 &middot; Two ways to play</p>
+    <h2>Pick one at launch. Switch any time.</h2>
+
+    <div class="modes">
+      <article class="mode">
+        <img src="/img/shots/sniper-thumb.webp" alt="The Dam in stereo VR, with the sniper rifle held in the player's right hand." width="800" height="450" loading="lazy">
+        <div class="mode-body">
+          <h3>Stereo VR</h3>
+          <p>True 3D first-person play. Look around with your head, lean around corners and duck behind cover.</p>
+          <ul class="ticks">
+            <li>Aim with your real hand. Shots leave the muzzle and go where the barrel points.</li>
+            <li>A 3D sight marks where your shot will land. The ammo counter sits on the gun.</li>
+            <li>Your left arm is Bond's own sleeve. Raise your wrist and look at it to open the watch.</li>
+            <li>Mines, the covert modem and the other gadgets are in your hand, thrown from where you hold them.</li>
+            <li>Smooth or snap turning, and an optional comfort vignette.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="mode">
+        <img src="/img/shots/screen-thumb.webp" alt="A rope bridge on the curved virtual screen, dual-wielding." width="800" height="450" loading="lazy">
+        <div class="mode-body">
+          <h3>Big virtual screen</h3>
+          <p>The whole game on a cinema-sized screen floating in front of you, with no artificial motion at all.</p>
+          <ul class="ticks">
+            <li>Flat or curved, at any size and distance.</li>
+            <li>Grab the screen with both grips to carry it anywhere.</li>
+            <li>Hold the right stick click to jump into stereo VR, and back.</li>
+            <li>Menus, briefings and cutscenes play here in both modes.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="sub">Also in the box</h3>
+    <div class="features">
+      <div class="feature">
+        <h4>In-VR launcher</h4>
+        <p>Pick your ROM, display mode, screen shape, turning and comfort without taking the headset off.</p>
+      </div>
+      <div class="feature">
+        <h4>72, 90 or 120&nbsp;Hz</h4>
+        <p>Choose the display rate that suits your headset and your stomach.</p>
+      </div>
+      <div class="feature">
+        <h4>Updates in the headset</h4>
+        <p>The launcher offers each new release. Press Update, no computer needed.</p>
+      </div>
+      <div class="feature">
+        <h4>HD textures, if you want them</h4>
+        <p>The Mods page downloads the fan-made <i>GoldenEye 007 HD</i> pack by intermissionfb and GhostlyDark, straight from their site.</p>
+      </div>
+      <div class="feature">
+        <h4>Laser-pointer menus</h4>
+        <p>Point at the file and mission folders and pull the trigger.</p>
+      </div>
+      <div class="feature">
+        <h4>Left-handed mode and cheats</h4>
+        <p>Swap hands in one tick. The classic cheats are on their own page, plus tiny or big guns.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens" class="section wrap">
+    <p class="kicker">03 &middot; Screens</p>
+    <h2>Straight from the headset</h2>
+    <div class="gallery">
+      <figure>
+        <a class="shot" href="/img/shots/scope.webp"><img src="/img/shots/scope-thumb.webp" alt="The Dam seen through the sniper scope." width="800" height="450" loading="lazy"></a>
+        <figcaption>Through the sniper scope on the Dam.</figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="/img/shots/sniper.webp"><img src="/img/shots/sniper-thumb.webp" alt="The sniper rifle in the player's hand, ammo counter on the stock." width="800" height="450" loading="lazy"></a>
+        <figcaption>The rifle in your hand, ammo on the gun.</figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="/img/shots/wrist.webp"><img src="/img/shots/wrist-thumb.webp" alt="Bond's sleeve and wristwatch on the player's left arm." width="800" height="450" loading="lazy"></a>
+        <figcaption>Bond's sleeve and watch on your left arm.</figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="/img/shots/watch.webp"><img src="/img/shots/watch-thumb.webp" alt="Bond's watch menu showing the mission status." width="800" height="450" loading="lazy"></a>
+        <figcaption>Raise your wrist to open the watch.</figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="/img/shots/bridge.webp"><img src="/img/shots/bridge-thumb.webp" alt="A rope bridge seen in stereo VR." width="800" height="450" loading="lazy"></a>
+        <figcaption>A rope bridge in stereo VR.</figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="/img/shots/screen.webp"><img src="/img/shots/screen-thumb.webp" alt="The same rope bridge on the curved virtual screen, dual-wielding." width="800" height="450" loading="lazy"></a>
+        <figcaption>The same bridge on the curved screen.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="install" class="section wrap">
+    <p class="kicker">04 &middot; Install</p>
+    <h2>Your mission objectives</h2>
+    <ol class="objectives">
+      <li>
+        <h3>Turn on Developer Mode</h3>
+        <p>Create a free organization at <a href="https://developers.meta.com/horizon/">developers.meta.com</a>, then switch on Developer Mode for your headset in the Meta Horizon phone app. One time only.</p>
+      </li>
+      <li>
+        <h3>Install with SideQuest</h3>
+        <p>Get the <a href="https://sidequestvr.com/setup-howto">SideQuest Advanced Installer</a>, plug in your Quest and allow USB debugging. Then press <b>Sideload now</b> on the <a href="https://sidequestvr.com/app/62675/goldeneye-vr">GoldenEye VR page</a>, or drop the APK onto SideQuest.</p>
+      </li>
+      <li>
+        <h3>Add your ROM and play</h3>
+        <p>Copy your GoldenEye 007 (USA) ROM to the headset's <b>Download</b> folder. Open GoldenEye VR from <b>Library &rarr; Unknown Sources</b>, press <b>Choose ROM file...</b>, then <b>START</b>.</p>
+      </li>
+    </ol>
+    <p class="more"><a href="https://github.com/MrSco/goldeneye-vr#-install-it-in-5-steps">Full step-by-step guide</a> <a href="https://github.com/MrSco/goldeneye-vr#-troubleshooting">Troubleshooting</a> <a href="https://github.com/MrSco/goldeneye-vr#-controls">Controls</a></p>
+
+    <aside id="rom" class="callout">
+      <h3>Bring your own game</h3>
+      <p>The download contains <b>no</b> GoldenEye 007 game data: no ROM, graphics, sound, music, text or levels. You need a ROM of the <b>USA (NTSC-U)</b> cartridge that you own (<code>.z64</code>, <code>.v64</code> or <code>.n64</code>, 12&nbsp;MB). The app reads everything from that file on your headset. Please don't ask for ROMs.</p>
+    </aside>
+  </section>
+
+  <section class="section wrap split">
+    <div>
+      <p class="kicker">05 &middot; Status</p>
+      <h2>Early release</h2>
+      <p>The whole game boots, and the Dam has been played end to end in both modes. Other missions are playable but less tested, so expect rough edges. Multiplayer is on the roadmap.</p>
+      <p>Found a bug? <a href="https://github.com/MrSco/goldeneye-vr/issues">Open an issue</a> with the build line from the launcher, your headset, the level and what happened.</p>
+    </div>
+    <div>
+      <p class="kicker">06 &middot; Credits</p>
+      <h2>Built on the shoulders of</h2>
+      <ul class="credits">
+        <li><a href="https://github.com/n64decomp/007">n64decomp/007</a><span>the GoldenEye decompilation</span></li>
+        <li><a href="https://github.com/fgsfdsfgs/perfect_dark">Perfect Dark PC port</a><span>the host layer</span></li>
+        <li><a href="https://github.com/Alex-LeTux/perfect_dark_VR">Perfect Dark VR</a><span>the VR layer, by Alex-LeTux</span></li>
+        <li><a href="https://github.com/jkdansereau/goldeneye-pc-port">GoldenEye PC port</a><span>64-bit porting findings</span></li>
+        <li><a href="https://github.com/no6969el/GEVR">GEVR</a><span>the PC VR project that inspired this one</span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <a class="brand" href="/">
+        <img src="/img/mark.webp" alt="" width="28" height="28">
+        GoldenEye VR
+      </a>
+      <nav class="foot-links" aria-label="Project">
+        <a href="https://github.com/MrSco/goldeneye-vr">GitHub</a>
+        <a href="https://sidequestvr.com/app/62675/goldeneye-vr">SideQuest</a>
+        <a href="https://www.youtube.com/watch?v=Nmlq5QxnVuM">YouTube</a>
+        <a href="https://github.com/MrSco/goldeneye-vr/issues">Issues</a>
+        <a href="https://github.com/MrSco/goldeneye-vr/blob/main/LICENSE">MIT license</a>
+      </nav>
+    </div>
+    <p class="legal">GoldenEye VR is a non-commercial fan project. It is not affiliated with, endorsed by or sponsored by Nintendo, Rare, Microsoft, MGM, Danjaq or Eon Productions. GoldenEye 007, James Bond and 007 are trademarks of their respective owners. No copyrighted game content is distributed with this project; you must supply a ROM of a cartridge you own.</p>
+  </div>
+</footer>
+
+<dialog class="lightbox" aria-label="Screenshot">
+  <figure>
+    <img alt="">
+    <figcaption></figcaption>
+  </figure>
+  <button class="lb-btn lb-close" type="button" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
+</dialog>
+
+</body>
+</html>

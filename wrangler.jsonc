@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static site: no Worker script, Cloudflare serves public/ as-is.
+  "name": "goldeneyevr",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  // Deploying attaches both hostnames to this Worker and issues certificates.
+  // www is sent to the bare domain by a Redirect Rule (see README).
+  "routes": [
+    { "pattern": "goldeneyevr.com", "custom_domain": true },
+    { "pattern": "www.goldeneyevr.com", "custom_domain": true }
+  ],
+  "workers_dev": true,
+  "observability": { "enabled": true }
+}
