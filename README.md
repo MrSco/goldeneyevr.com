@@ -65,8 +65,9 @@ The domain is on Cloudflare Registrar, so its DNS zone already exists.
    and the CSP already allows its script. If automatic setup shows no visits,
    paste its `<script defer src="https://static.cloudflareinsights.com/...">`
    snippet before `</body>` in `index.html` instead.
-5. **Email (optional, free).** Zone → **Email** → **Email Routing**, forward
-   `contact@goldeneyevr.com` to your inbox.
+5. **Email.** `info@goldeneyevr.com` forwards to the owner's inbox through
+   Email Routing (free). Check or change it with
+   `npx wrangler email routing rules list goldeneyevr.com`.
 
 Until the domain is attached, the site is also at
 `https://goldeneyevr.<your-account>.workers.dev`.
