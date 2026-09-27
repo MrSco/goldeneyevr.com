@@ -443,7 +443,6 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
   .top-links a:not(.keep) { display: none; }
   .modes, .split, .mp { grid-template-columns: 1fr; }
   .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .objectives { grid-template-columns: 1fr; }
 
   /* Stack the hero: the eye on top, the headline below it. */
@@ -466,8 +465,7 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
 
 @media (max-width: 640px) {
   .features { grid-template-columns: 1fr; }
-  .gallery { gap: 12px; }
-  .gallery figcaption { font-size: 13px; }
+  .gallery { grid-template-columns: 1fr; gap: 20px; }
   .btn { flex: 1 1 auto; justify-content: center; }
   .mode-body { padding: 20px 20px 8px; }
   .lightbox figure { padding: 64px 12px 90px; }
