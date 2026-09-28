@@ -24,6 +24,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/fonts/barlow-semi-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
+  <noscript><link rel="stylesheet" href="/nojs.css"></noscript>
   <script src="/main.js" defer></script>
 </head>
 <body>
@@ -38,7 +39,12 @@
       <img src="/img/mark.webp" alt="" width="28" height="28">
       GoldenEye VR
     </a>
-    <div class="top-links">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu">
+      <svg class="i-open" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="i-close" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Menu</span>
+    </button>
+    <div class="top-links" id="site-menu">
       <a href="#play">Features</a>
       <a href="#multiplayer">Multiplayer</a>
       <a href="#screens">Screens</a>

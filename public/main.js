@@ -1,6 +1,23 @@
-// Three small jobs. The page works without any of them: the video link goes
-// to YouTube, the screenshots and clips open as plain files, and the APK button
-// goes to the latest GitHub release.
+// Four small jobs. The page works without any of them: phones show Discord and
+// GitHub in the top bar (nojs.css), the video link goes to YouTube, the
+// screenshots and clips open as plain files, and the APK button goes to the
+// latest GitHub release.
+
+// 0. Phone menu: the Menu button opens the section links as a panel.
+const topNav = document.querySelector(".top");
+const menuBtn = topNav?.querySelector(".menu-btn");
+if (menuBtn) {
+  const setMenu = (open) => {
+    topNav.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+  };
+  menuBtn.addEventListener("click", () => setMenu(!topNav.classList.contains("open")));
+  topNav.querySelectorAll(".top-links a").forEach((link) => link.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("click", (event) => { if (!topNav.contains(event.target)) setMenu(false); });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && topNav.classList.contains("open")) { setMenu(false); menuBtn.focus(); }
+  });
+}
 
 // 1. Video: load YouTube only when someone presses play.
 document.querySelectorAll("[data-youtube]").forEach((link) => {

@@ -151,6 +151,9 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
 }
 .top-links a:hover { opacity: 1; color: var(--gold-hi); }
 
+/* Phones and tablets: the links fold into a panel behind the Menu button. */
+.menu-btn { display: none; }
+
 .hero-body {
   margin-top: auto;
   padding-top: 40px;
@@ -444,8 +447,41 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
 /* ---------- Narrow screens ---------- */
 
 @media (max-width: 900px) {
-  .top-links { gap: 20px; }
-  .top-links a:not(.keep) { display: none; }
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid rgba(237, 231, 218, 0.28);
+    border-radius: 8px;
+    background: rgba(11, 10, 8, 0.6);
+    color: var(--text);
+    font: 600 16px/1 var(--display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .menu-btn:hover { border-color: var(--gold); color: var(--gold-hi); }
+  .menu-btn .i-close, .top.open .menu-btn .i-open { display: none; }
+  .top.open .menu-btn .i-close { display: block; }
+  .top-links {
+    display: none;
+    position: absolute;
+    top: calc(100% - 8px);
+    left: var(--gutter);
+    right: var(--gutter);
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  }
+  .top.open .top-links { display: flex; }
+  .top-links a { padding: 14px 12px; border-radius: 6px; font-size: 18px; opacity: 1; }
+  .top-links a:hover { background: var(--surface-2); }
   .modes, .split, .mp { grid-template-columns: 1fr; }
   .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .objectives { grid-template-columns: 1fr; }

@@ -1,0 +1,9 @@
+/* Without JavaScript the Menu button can't open, so phones keep the two
+   outside links in the top bar instead. */
+@media (max-width: 900px) {
+  .menu-btn { display: none !important; }
+  .top-links { display: flex !important; position: static; flex-direction: row; gap: 20px;
+    padding: 0; background: none; border: 0; box-shadow: none; }
+  .top-links a { display: none; padding: 0; font-size: 16px; }
+  .top-links a.keep { display: inline; }
+}
