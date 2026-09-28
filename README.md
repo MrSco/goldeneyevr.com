@@ -71,16 +71,12 @@ To make it deploy on push: dashboard → **Workers & Pages** → `goldeneyevr` �
 **Settings** → **Builds** → connect `MrSco/goldeneyevr.com` (build command
 empty, deploy command `npx wrangler deploy`).
 
-### Still to do in the dashboard
-
-- **HTTPS everywhere.** SSL/TLS → **Edge Certificates** → **Always Use HTTPS**
-  → On. Until then `http://goldeneyevr.com` serves the page unencrypted instead
-  of switching to `https://`.
-
 ### Already set up
 
 - **www → bare domain:** Redirect Rule `http*://www.goldeneyevr.com/*` →
   `https://goldeneyevr.com/${2}`, 301, query string kept (2026-09-27).
+- **HTTPS everywhere:** SSL/TLS → Edge Certificates → **Always Use HTTPS** is on,
+  so `http://` requests get a 301 to `https://` (2026-09-27).
 - **Email:** `info@goldeneyevr.com` forwards to the owner's inbox through
   Email Routing. Check it with
   `npx wrangler email routing rules list goldeneyevr.com`.
