@@ -8,7 +8,7 @@ no build step.
 |------|------|
 | `public/` | The site, exactly as served: `index.html`, `styles.css`, `main.js`, images, fonts |
 | `public/_headers` | Security headers (CSP) and font caching, applied by Cloudflare |
-| `media-src/` | Full-size sources: headset screenshots and the project's own art |
+| `media-src/` | Full-size sources: headset screenshots, clips and the project's own art |
 | `tools/media.py` | Turns `media-src/` into the web images in `public/img/` |
 | `wrangler.jsonc` | Cloudflare config: serve `public/`, attach the two hostnames |
 
@@ -31,6 +31,19 @@ Cloudflare uses, including `_headers`, so a CSP mistake shows up here first.
    around a floating screen and padded to 16:9.
 3. In `public/index.html`, point a gallery `<figure>` at the new name and write
    its caption and alt text.
+
+A still can also come from a headset recording
+(`/sdcard/Oculus/VideoShots/`): save a sharp frame as `media-src/shots/<name>.jpg`,
+for example `ffmpeg -ss 302.9 -i clip.mp4 -frames:v 1 -q:v 1 media-src/shots/stereo.jpg`.
+
+## Looping clips
+
+`tools/media.py` also turns each entry in its `CLIPS` table into a silent,
+looping `public/img/shots/<name>.mp4` (1280 wide, H.264) plus a poster image.
+The sources live in `media-src/clips/`. Quest recordings start and end on the
+system menu, so each entry gives the start and end seconds to keep and the
+moment to use as the poster. In the gallery, a clip loops only while it's on
+screen, and shows its poster to visitors who have reduced motion turned on.
 
 ## What stays current by itself
 

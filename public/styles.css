@@ -49,7 +49,8 @@ body {
   overflow-x: hidden;
 }
 
-img { display: block; max-width: 100%; height: auto; }
+img, video { display: block; max-width: 100%; height: auto; }
+[hidden] { display: none !important; }
 
 a { color: var(--gold-hi); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { color: #fff; }
@@ -312,6 +313,10 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
 .mp { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px 48px; align-items: start; }
 .mp-lede { font-size: clamp(18px, 1.8vw, 21px); color: #d9d2c3; max-width: 620px; }
 .mp-copy .ticks li { font-size: 16.5px; }
+.mp-side { display: grid; gap: 20px; }
+.mp-shot { margin: 0; }
+.mp-shot img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--line); border-radius: var(--radius); background: #000; }
+.mp-shot figcaption { margin-top: 10px; font-size: 14.5px; color: var(--muted); }
 .mp-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -334,8 +339,8 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
   border: 1px solid var(--line);
   background: #000;
 }
-.shot img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.3s; }
-.shot:hover img { transform: scale(1.03); }
+.shot img, .shot video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.3s; }
+.shot:hover img, .shot:hover video { transform: scale(1.03); }
 .gallery figcaption { margin-top: 10px; font-size: 14.5px; color: var(--muted); }
 
 /* Install */
@@ -418,7 +423,7 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
 .lightbox::backdrop { background: rgba(0, 0, 0, 0.6); }
 .lightbox[open] { display: flex; align-items: center; justify-content: center; }
 .lightbox figure { margin: 0; padding: 64px 72px 24px; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; }
-.lightbox img { max-width: min(1600px, 100%); max-height: calc(100dvh - 150px); width: auto; border-radius: 6px; }
+.lightbox img, .lightbox video { max-width: min(1600px, 100%); max-height: calc(100dvh - 150px); width: auto; border-radius: 6px; }
 .lightbox figcaption { margin-top: 14px; color: var(--muted); font-size: 15px; text-align: center; }
 .lb-btn {
   position: absolute;

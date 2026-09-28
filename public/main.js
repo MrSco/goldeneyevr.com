@@ -1,6 +1,6 @@
 // Three small jobs. The page works without any of them: the video link goes
-// to YouTube, the screenshots open as images and the APK button goes to the
-// latest GitHub release.
+// to YouTube, the screenshots and clips open as plain files, and the APK button
+// goes to the latest GitHub release.
 
 // 1. Video: load YouTube only when someone presses play.
 document.querySelectorAll("[data-youtube]").forEach((link) => {
@@ -17,17 +17,32 @@ document.querySelectorAll("[data-youtube]").forEach((link) => {
   }, { once: true });
 });
 
-// 2. Screenshots: open full size in a lightbox, arrows to step through.
+// 2. Screenshots and clips: open full size in a lightbox, arrows to step through.
 const box = document.querySelector(".lightbox");
 const shots = [...document.querySelectorAll(".gallery .shot")];
 let current = 0;
+
+const stillMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function show(i) {
   current = (i + shots.length) % shots.length;
   const shot = shots[current];
   const img = box.querySelector("img");
-  img.src = shot.href;
-  img.alt = shot.querySelector("img").alt;
+  const clip = box.querySelector("video");
+  const isClip = shot.hasAttribute("data-video");
+  img.hidden = isClip;
+  clip.hidden = !isClip;
+  if (isClip) {
+    img.removeAttribute("src");
+    clip.src = shot.href;
+    clip.controls = stillMotion.matches;
+    if (!stillMotion.matches) clip.play().catch(() => {});
+  } else {
+    clip.pause();
+    clip.removeAttribute("src");
+    img.src = shot.href;
+    img.alt = shot.querySelector("img").alt;
+  }
   box.querySelector("figcaption").textContent =
     shot.closest("figure").querySelector("figcaption")?.textContent || "";
 }
@@ -50,7 +65,25 @@ if (box && typeof box.showModal === "function") {
     if (event.key === "ArrowLeft") show(current - 1);
     if (event.key === "ArrowRight") show(current + 1);
   });
-  box.addEventListener("close", () => { box.querySelector("img").removeAttribute("src"); });
+  box.addEventListener("close", () => {
+    box.querySelector("img").removeAttribute("src");
+    const clip = box.querySelector("video");
+    clip.pause();
+    clip.removeAttribute("src");
+  });
+}
+
+// Gallery clips loop only while on screen, and not at all for people who
+// asked their system for less motion (they get the poster and can open it).
+const tileClips = [...document.querySelectorAll(".gallery video")];
+if (tileClips.length && "IntersectionObserver" in window) {
+  const watcher = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting && !stillMotion.matches) target.play().catch(() => {});
+      else target.pause();
+    });
+  }, { threshold: 0.4 });
+  tileClips.forEach((clip) => watcher.observe(clip));
 }
 
 // 3. Latest release: put the version on the APK button and link the file itself.

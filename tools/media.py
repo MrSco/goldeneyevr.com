@@ -61,6 +61,38 @@ def shots():
         print("shot", src.stem, im.size)
 
 
+# Looping gallery clips: name -> (source in media-src/clips, start s, end s,
+# poster frame s). All times are in the source.
+# Quest recordings open and close on the system menu, so trim both ends.
+CLIPS = {
+    "watch-raise": ("watch-raise-src.mp4", 1.0, 5.5, 4.5),
+}
+
+
+def clips():
+    """Silent looping MP4s (H.264, plays everywhere) plus a poster frame."""
+    import subprocess
+    dest = OUT / "img" / "shots"
+    for name, (src, start, end, poster_at) in CLIPS.items():
+        length = end - start
+        vf = (f"fps=30,scale=1280:-2,fade=t=in:st=0:d=0.25,"
+              f"fade=t=out:st={length - 0.3:.2f}:d=0.3")
+        subprocess.run([
+            "ffmpeg", "-v", "error", "-y", "-ss", str(start), "-to", str(end),
+            "-i", str(SRC / "clips" / src), "-vf", vf, "-an",
+            "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p",
+            "-crf", "26", "-preset", "slow", "-movflags", "+faststart",
+            str(dest / f"{name}.mp4")], check=True)
+        poster = dest / f"{name}-poster.jpg"
+        subprocess.run([
+            "ffmpeg", "-v", "error", "-y", "-ss", str(poster_at),
+            "-i", str(SRC / "clips" / src), "-frames:v", "1", str(poster)], check=True)
+        im = Image.open(poster).convert("RGB")
+        fit_width(im, 800).save(dest / f"{name}-poster.webp", quality=76, method=6)
+        poster.unlink()
+        print("clip", name, f"{length:.1f}s")
+
+
 def circle(im):
     """Round mask for the small icons, so the tab icon reads as an iris."""
     size = im.width * 4
@@ -99,4 +131,5 @@ def brand():
 
 if __name__ == "__main__":
     shots()
+    clips()
     brand()
