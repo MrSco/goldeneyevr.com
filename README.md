@@ -73,13 +73,14 @@ empty, deploy command `npx wrangler deploy`).
 
 ### Still to do in the dashboard
 
-- **www → bare domain.** Zone `goldeneyevr.com` → **Rules** → **Redirect
-  Rules** → **Create rule** → template **Redirect from WWW to root**, status
-  301. Until then `www` serves the same page, and its canonical link points to
-  the bare domain.
+- **HTTPS everywhere.** SSL/TLS → **Edge Certificates** → **Always Use HTTPS**
+  → On. Until then `http://goldeneyevr.com` serves the page unencrypted instead
+  of switching to `https://`.
 
 ### Already set up
 
+- **www → bare domain:** Redirect Rule `http*://www.goldeneyevr.com/*` →
+  `https://goldeneyevr.com/${2}`, 301, query string kept (2026-09-27).
 - **Email:** `info@goldeneyevr.com` forwards to the owner's inbox through
   Email Routing. Check it with
   `npx wrangler email routing rules list goldeneyevr.com`.
