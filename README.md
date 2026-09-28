@@ -55,35 +55,36 @@ screen, and shows its poster to visitors who have reduced motion turned on.
 
 ## Deploying
 
-Pushing to `main` deploys (Cloudflare Workers Builds). Other branches get a
-preview URL.
+Live since 2026-09-27 at https://goldeneyevr.com (Worker `goldeneyevr`).
+Deploy from this folder with Wrangler, logged in to the Cloudflare account:
 
-### One-time Cloudflare setup
+```bash
+npm run deploy
+```
 
-The domain is on Cloudflare Registrar, so its DNS zone already exists.
+That uploads `public/`, and `wrangler.jsonc` keeps `goldeneyevr.com` and
+`www.goldeneyevr.com` attached. The site is also at
+`https://goldeneyevr.roccojuliano.workers.dev`.
 
-1. **Connect the repo.** Dashboard → **Workers & Pages** → **Create** →
-   **Import a repository** → GitHub → `MrSco/goldeneyevr.com`.
-   - Project name: `goldeneyevr` (must match `name` in `wrangler.jsonc`)
-   - Build command: leave empty
-   - Deploy command: `npx wrangler deploy` (the default)
-2. **Domains.** The first deploy attaches `goldeneyevr.com` and
-   `www.goldeneyevr.com` from `wrangler.jsonc` and issues certificates. If it
-   says a DNS record already exists for one of them, delete that record under
-   **DNS → Records** and retry the deploy.
-3. **www → bare domain.** Zone `goldeneyevr.com` → **Rules** → **Redirect
-   Rules** → **Create rule** → template **Redirect from WWW to root**, status 301.
-4. **Analytics (optional, free).** **Web Analytics** → **Add a site** →
-   `goldeneyevr.com` → automatic setup. It is cookieless, so no consent banner,
-   and the CSP already allows its script. If automatic setup shows no visits,
-   paste its `<script defer src="https://static.cloudflareinsights.com/...">`
-   snippet before `</body>` in `index.html` instead.
-5. **Email.** `info@goldeneyevr.com` forwards to the owner's inbox through
-   Email Routing (free). Check or change it with
-   `npx wrangler email routing rules list goldeneyevr.com`.
+The repo is not connected to Cloudflare, so pushing does **not** deploy.
+To make it deploy on push: dashboard → **Workers & Pages** → `goldeneyevr` →
+**Settings** → **Builds** → connect `MrSco/goldeneyevr.com` (build command
+empty, deploy command `npx wrangler deploy`).
 
-Until the domain is attached, the site is also at
-`https://goldeneyevr.<your-account>.workers.dev`.
+### Still to do in the dashboard
+
+- **www → bare domain.** Zone `goldeneyevr.com` → **Rules** → **Redirect
+  Rules** → **Create rule** → template **Redirect from WWW to root**, status
+  301. Until then `www` serves the same page, and its canonical link points to
+  the bare domain.
+
+### Already set up
+
+- **Email:** `info@goldeneyevr.com` forwards to the owner's inbox through
+  Email Routing. Check it with
+  `npx wrangler email routing rules list goldeneyevr.com`.
+- **Web Analytics:** the beacon snippet in `index.html` (cookieless). The CSP
+  allows it.
 
 ## Rules for this site
 
