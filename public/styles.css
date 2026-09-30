@@ -331,6 +331,18 @@ code { font-family: var(--mono); font-size: 0.88em; color: var(--gold-hi); }
 .mp-card p { color: var(--muted); font-size: 15.5px; }
 .mp-card .btn { margin: 6px 0 16px; }
 .mp-card .fine { margin: 0; font-size: 13.5px; }
+.live-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.live-header h3 { margin: 0; }
+.live-dot { width: 9px; height: 9px; border-radius: 50%; background: #555; display: inline-block; transition: background 0.3s; }
+.live-dot.active { background: #47e279; box-shadow: 0 0 8px rgba(71, 226, 121, 0.6); }
+.live-list { display: grid; gap: 9px; margin: 12px 0 16px; }
+.live-item { background: rgba(0, 0, 0, 0.4); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.live-item-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.live-item-top strong { font-size: 15px; color: #fff; }
+.live-badge { font-size: 11px; padding: 2px 7px; border-radius: 12px; border: 1px solid #765c24; color: var(--gold); text-transform: uppercase; font-family: ui-monospace, monospace; }
+.live-badge.in-prog { border-color: #3b7b4a; color: #7be295; }
+.live-item-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.live-actions { margin-bottom: 14px; }
 
 /* Gallery */
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }

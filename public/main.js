@@ -116,3 +116,80 @@ fetch("https://api.github.com/repos/MrSco/goldeneye-vr/releases/latest", {
     if (apk) document.querySelectorAll("[data-apk]").forEach((el) => { el.href = apk.browser_download_url; });
   })
   .catch(() => {});
+// 4. Live lobbies activity board
+const stages = { 34:"Facility", 31:"Complex", 38:"Temple", 46:"Stack", 39:"Caverns", 48:"Library", 45:"Basement", 50:"Caves", 32:"Egypt", 27:"Bunker II", 24:"Archives" };
+const liveSummary = document.getElementById("live-summary");
+const liveList = document.getElementById("live-games-list");
+const liveDot = document.getElementById("live-indicator");
+
+function formatTimeAgo(ms) {
+  const s = Math.max(0, Math.floor((Date.now() - ms) / 1000));
+  if (s < 60) return `${s}s ago`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  const rem = m % 60;
+  return rem ? `${h}h ${rem}m ago` : `${h}h ago`;
+}
+
+function formatDuration(ms) {
+  const s = Math.max(0, Math.floor((Date.now() - ms) / 1000));
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m`;
+  const h = Math.floor(m / 60);
+  const rem = m % 60;
+  return rem ? `${h}h ${rem}m` : `${h}h`;
+}
+
+async function updateLiveLobbies() {
+  if (!liveSummary || !liveList) return;
+  try {
+    const res = await fetch("https://lobbies.goldeneyevr.com/v1/activity", { cache: "no-store" });
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    if (liveDot) liveDot.classList.add("active");
+    const pub = data.counts?.public || 0;
+    const players = data.counts?.players || 0;
+    const inProg = data.counts?.inProgress || 0;
+    if (pub === 0) {
+      liveSummary.textContent = "No public games right now. Host one in your headset!";
+      liveList.innerHTML = "";
+    } else {
+      liveSummary.textContent = `${pub} public ${pub === 1 ? "game" : "games"} (${players} ${players === 1 ? "player" : "players"}, ${inProg} in match)`;
+      liveList.replaceChildren(...data.lobbies.slice(0, 3).map((g) => {
+        const row = document.createElement("div");
+        row.className = "live-item";
+        const titleRow = document.createElement("div");
+        titleRow.className = "live-item-top";
+        const name = document.createElement("strong");
+        name.textContent = g.name;
+        const phase = document.createElement("span");
+        phase.className = "live-badge" + (g.phase === "in_progress" ? " in-prog" : "");
+        phase.textContent = { waiting: "In lobby", warmup: "Warmup", in_progress: "In progress" }[g.phase] || "Live";
+        titleRow.append(name, phase);
+
+        const sub = document.createElement("div");
+        sub.className = "live-item-sub";
+        const stageName = stages[g.stage] || `Stage ${g.stage}`;
+        const hosted = g.createdAt ? formatTimeAgo(g.createdAt) : null;
+        const dur = g.phaseChangedAt ? formatDuration(g.phaseChangedAt) : null;
+        const phaseStr = { waiting: "in lobby", warmup: "in warmup", in_progress: "playing" }[g.phase] || "live";
+        const timePart = hosted && dur ? ` · ${hosted} (${phaseStr} ${dur})` : hosted ? ` · ${hosted}` : "";
+        sub.textContent = `${stageName} · ${g.players}/${g.maxPlayers} players${timePart}`;
+
+        row.append(titleRow, sub);
+        return row;
+      }));
+    }
+  } catch {
+    if (liveDot) liveDot.classList.remove("active");
+    liveSummary.textContent = "See public games and matches happening now, then join from your headset.";
+  }
+}
+
+if (liveSummary) {
+  updateLiveLobbies();
+  setInterval(() => { if (!document.hidden) updateLiveLobbies(); }, 30_000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) updateLiveLobbies(); });
+}

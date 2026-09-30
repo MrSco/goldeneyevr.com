@@ -167,10 +167,16 @@
         <img src="/img/shots/lobby-thumb.webp" alt="The in-VR launcher hosting a multiplayer lobby on Facility, one of four slots filled, waiting for another player." width="800" height="450" loading="lazy">
         <figcaption>Hosting a lobby from the launcher.</figcaption>
       </figure>
-      <aside class="mp-card">
-        <h3>Find a match</h3>
-        <p>See public games and matches happening now, then join from your headset.</p>
-        <a class="btn btn-gold" href="https://lobbies.goldeneyevr.com/">Live lobbies</a>
+      <aside class="mp-card" id="live-lobbies-card">
+        <div class="live-header">
+          <h3>Live Multiplayer</h3>
+          <span id="live-indicator" class="live-dot" title="Live status"></span>
+        </div>
+        <p id="live-summary" class="fine">Checking active games...</p>
+        <div id="live-games-list" class="live-list"></div>
+        <div class="live-actions">
+          <a class="btn btn-gold" href="https://lobbies.goldeneyevr.com/">View Live Lobbies</a>
+        </div>
         <p class="fine">Hosting a private game? Post its join code in #find-a-match on the <a href="https://discord.gg/R4VPfRkb3p">Discord</a>.</p>
       </aside>
       </div>
