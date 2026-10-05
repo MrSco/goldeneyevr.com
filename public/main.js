@@ -199,7 +199,7 @@ async function updateLiveLobbies() {
 }
 
 if (liveSummary) {
-  const POLL_MS = 60_000;
+  const POLL_MS = 300_000;
   const liveCard = document.getElementById("live-lobbies-card");
   let pollTimer = null;
 
