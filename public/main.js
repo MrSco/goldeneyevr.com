@@ -155,7 +155,7 @@ function formatDuration(ms) {
 async function updateLiveLobbies() {
   if (!liveSummary || !liveList) return;
   try {
-    const res = await fetch("https://lobbies.goldeneyevr.com/v1/activity", { cache: "no-store" });
+    const res = await fetch("https://lobbies.goldeneyevr.com/v1/activity");
     if (!res.ok) throw new Error();
     const data = await res.json();
     if (liveDot) liveDot.classList.add("active");
@@ -199,7 +199,38 @@ async function updateLiveLobbies() {
 }
 
 if (liveSummary) {
-  updateLiveLobbies();
-  setInterval(() => { if (!document.hidden) updateLiveLobbies(); }, 30_000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) updateLiveLobbies(); });
+  const POLL_MS = 300_000;
+  const liveCard = document.getElementById("live-lobbies-card");
+  let pollTimer = null;
+
+  const stopPolling = () => {
+    if (pollTimer !== null) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  };
+
+  const startPolling = () => {
+    if (pollTimer !== null) return;
+    updateLiveLobbies();
+    pollTimer = setInterval(updateLiveLobbies, POLL_MS);
+  };
+
+  if (typeof IntersectionObserver === "function" && liveCard) {
+    let cardOnScreen = false;
+    new IntersectionObserver((entries) => {
+      cardOnScreen = entries.some((entry) => entry.isIntersecting);
+      if (cardOnScreen && !document.hidden) startPolling();
+      else stopPolling();
+    }, { threshold: 0 }).observe(liveCard);
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && cardOnScreen) startPolling();
+      else stopPolling();
+    });
+  } else {
+    updateLiveLobbies();
+    setInterval(() => { if (!document.hidden) updateLiveLobbies(); }, POLL_MS);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) updateLiveLobbies(); });
+  }
 }
