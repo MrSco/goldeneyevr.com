@@ -66,6 +66,10 @@ That uploads `public/`, and `wrangler.jsonc` keeps `goldeneyevr.com` and
 `www.goldeneyevr.com` attached. The site is also at
 `https://goldeneyevr.roccojuliano.workers.dev`.
 
+## Lobby service
+
+Live games are a second Worker, `gevr-lobbies`, in `services/lobbies/`. It keeps its own Wrangler project and the hostname `lobbies.goldeneyevr.com`. Deploy it from that directory with its own `npm run deploy`. `npm run deploy` here is still only this website.
+
 The repo is not connected to Cloudflare, so pushing does **not** deploy.
 To make it deploy on push: dashboard → **Workers & Pages** → `goldeneyevr` →
 **Settings** → **Builds** → connect `MrSco/goldeneyevr.com` (build command
