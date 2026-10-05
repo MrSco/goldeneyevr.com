@@ -155,7 +155,7 @@ function formatDuration(ms) {
 async function updateLiveLobbies() {
   if (!liveSummary || !liveList) return;
   try {
-    const res = await fetch("https://lobbies.goldeneyevr.com/v1/activity", { cache: "no-store" });
+    const res = await fetch("https://lobbies.goldeneyevr.com/v1/activity");
     if (!res.ok) throw new Error();
     const data = await res.json();
     if (liveDot) liveDot.classList.add("active");
