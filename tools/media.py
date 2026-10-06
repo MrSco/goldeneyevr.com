@@ -13,7 +13,7 @@ own art in media-src/art/ (copied from goldeneye-vr/docs/).
 """
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "media-src"
@@ -93,22 +93,13 @@ def clips():
         print("clip", name, f"{length:.1f}s")
 
 
-def circle(im):
-    """Round mask for the small icons, so the tab icon reads as an iris."""
-    size = im.width * 4
-    mask = Image.new("L", (size, size), 0)
-    ImageDraw.Draw(mask).ellipse((0, 0, size - 1, size - 1), fill=255)
-    out = im.convert("RGBA")
-    out.putalpha(mask.resize(im.size, Image.LANCZOS))
-    return out
-
-
 def brand():
     art = SRC / "art"
     img = OUT / "img"
 
-    # Hero: the reticle eye, text-free version of the README banner.
-    Image.open(art / "banner_source.jpg").convert("RGB").save(
+    # Hero: suppressed pistol on the golden reticle. The wide frame leaves the
+    # left side dark so the headline can sit over it.
+    Image.open(art / "hero-pistol.jpg").convert("RGB").save(
         img / "hero.webp", quality=84, method=6)
 
     # Link-preview card, 1200x630: the README banner, cropped from the right so
@@ -118,14 +109,17 @@ def brand():
     banner.crop((0, 0, w, banner.height)).resize((1200, 630), Image.LANCZOS).save(
         img / "og.jpg", quality=86, optimize=True)
 
-    # Icons: the iris and crosshair from the app icon.
-    icon = Image.open(art / "icon_source.jpg").convert("RGB")
-    iris = icon.crop((332, 248, 932, 848))
-    circle(iris.resize((64, 64), Image.LANCZOS)).save(OUT / "favicon-64.png")
-    circle(iris.resize((48, 48), Image.LANCZOS)).save(
+    # Icons: the square pistol. Kept square so the suppressor is not clipped.
+    icon = Image.open(art / "icon-pistol.jpg").convert("RGB")
+    icon.resize((64, 64), Image.LANCZOS).save(OUT / "favicon-64.png")
+    icon.resize((48, 48), Image.LANCZOS).save(
         OUT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
     icon.resize((180, 180), Image.LANCZOS).save(OUT / "apple-touch-icon.png")
-    iris.resize((96, 96), Image.LANCZOS).save(img / "mark.webp", quality=88)
+    icon.resize((96, 96), Image.LANCZOS).save(img / "mark.webp", quality=88)
+
+    lobbies = ROOT / "services" / "lobbies" / "public"
+    for name in ("favicon-64.png", "favicon.ico", "apple-touch-icon.png"):
+        (lobbies / name).write_bytes((OUT / name).read_bytes())
     print("brand done")
 
 
